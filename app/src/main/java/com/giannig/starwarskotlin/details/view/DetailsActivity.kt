@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.view.detailsview
+package com.giannig.starwarskotlin.details.view
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import com.giannig.starwarskotlin.R
 import com.giannig.starwarskotlin.model.State
-import com.giannig.starwarskotlin.presenter.DetailsPresenter
+import com.giannig.starwarskotlin.details.DetailsPresenter
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity(), DetailsView {

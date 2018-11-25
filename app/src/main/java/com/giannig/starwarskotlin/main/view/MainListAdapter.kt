@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.view.mainview
+package com.giannig.starwarskotlin.main.view
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

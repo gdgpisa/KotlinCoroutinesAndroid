@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.view.detailsview
+package com.giannig.starwarskotlin.details.view
 
 import com.giannig.starwarskotlin.model.State
 

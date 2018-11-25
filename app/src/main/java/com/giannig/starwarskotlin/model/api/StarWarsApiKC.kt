@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.api
+package com.giannig.starwarskotlin.model.api
 
 import com.giannig.starwarskotlin.model.dto.StarWarsPeople
 import com.giannig.starwarskotlin.model.dto.StarWarsPlanet

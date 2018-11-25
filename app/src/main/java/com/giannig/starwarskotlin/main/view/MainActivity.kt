@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.view.mainview
+package com.giannig.starwarskotlin.main.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,8 +6,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.giannig.starwarskotlin.R
 import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
-import com.giannig.starwarskotlin.presenter.MainPresenter
-import com.giannig.starwarskotlin.view.detailsview.DetailsActivity
+import com.giannig.starwarskotlin.main.MainPresenter
+import com.giannig.starwarskotlin.details.view.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 

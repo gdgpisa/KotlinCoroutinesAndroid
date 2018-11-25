@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.api
+package com.giannig.starwarskotlin.model.api
 
 class Api {
     companion object {

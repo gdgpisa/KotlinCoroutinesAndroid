@@ -1,7 +1,7 @@
 package com.giannig.starwarskotlin.model
 
-import com.giannig.starwarskotlin.api.Api
-import com.giannig.starwarskotlin.api.StarWarsApiKC
+import com.giannig.starwarskotlin.model.api.Api
+import com.giannig.starwarskotlin.model.api.StarWarsApiKC
 import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
