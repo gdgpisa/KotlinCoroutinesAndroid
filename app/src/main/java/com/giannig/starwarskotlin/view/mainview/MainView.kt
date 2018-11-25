@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.view
+package com.giannig.starwarskotlin.view.mainview
 
 import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
 

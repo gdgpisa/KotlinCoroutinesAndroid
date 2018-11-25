@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-class StarWarsDataProvider {
+object StarWarsDataProvider {
 
     private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
@@ -25,7 +25,16 @@ class StarWarsDataProvider {
     suspend fun providePlanets(): State {
         return try {
             val planets = retrofit.getPlanets().await()
-            State.Success(planets.results)
+            State.PlanetList(planets.results)
+        }catch (e: IOException){
+            State.Error
+        }
+    }
+
+    suspend fun providePlanet(planetId: String): State {
+        return try {
+            val planet = retrofit.getPlanet(planetId).await()
+            State.Planet(planet)
         }catch (e: IOException){
             State.Error
         }
@@ -33,6 +42,7 @@ class StarWarsDataProvider {
 }
 
 sealed class State {
-    data class Success(val result: List<StarWarsPlanet>?): State()
+    data class Planet(val planet: StarWarsPlanet):State()
+    data class PlanetList(val result: List<StarWarsPlanet>?): State()
     object Error : State()
 }

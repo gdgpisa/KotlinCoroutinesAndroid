@@ -7,4 +7,5 @@
     <dimen name="text_item_size">21sp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="text_padding">8dp</dimen>
+    <dimen name="marginTop">16dp</dimen>
 </resources>

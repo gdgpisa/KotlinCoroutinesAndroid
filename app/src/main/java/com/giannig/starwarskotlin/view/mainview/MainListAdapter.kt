@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.view.adapters
+package com.giannig.starwarskotlin.view.mainview
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,13 +8,18 @@ import android.widget.TextView
 import com.giannig.starwarskotlin.R
 import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
 
-class MainListAdapter(private val onItemClick: (View) -> Unit) : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>(){
+class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>() {
 
-   private var list:List<StarWarsPlanet> = emptyList()
+    private var list: List<StarWarsPlanet> = emptyList()
+    private var onItemClick: (Int) -> Unit = {}
 
     fun addValues(newList: List<StarWarsPlanet>) {
         list = list.plus(newList)
         notifyDataSetChanged()
+    }
+
+    fun setClickLister(onClick: (Int) -> Unit) {
+        onItemClick = onClick
     }
 
     override fun getItemCount() = list.size
@@ -28,10 +33,12 @@ class MainListAdapter(private val onItemClick: (View) -> Unit) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: MainListViewHolder, position: Int) {
         val item = list[position]
-        holder.set(item, onItemClick)
+        holder.set(item){
+            onItemClick(position)
+        }
     }
 
-    class MainListViewHolder (private val v : View): RecyclerView.ViewHolder(v) {
+    class MainListViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
         private val planetNameText = v.findViewById<TextView>(R.id.textPlanetName)
 
         fun set(item: StarWarsPlanet, onClick: (View) -> Unit) {

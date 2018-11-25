@@ -3,7 +3,7 @@ package com.giannig.starwarskotlin.presenter
 import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
 import com.giannig.starwarskotlin.model.StarWarsDataProvider
 import com.giannig.starwarskotlin.model.State
-import com.giannig.starwarskotlin.view.MainView
+import com.giannig.starwarskotlin.view.mainview.MainView
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -16,10 +16,6 @@ class MainPresenter(private val view: MainView) : CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = job + IO
 
-    fun onItemClick() {
-
-    }
-
     fun update() {
         loadData()
         view.loading()
@@ -30,9 +26,9 @@ class MainPresenter(private val view: MainView) : CoroutineScope {
     }
 
     private fun loadData() = launch {
-        val response = StarWarsDataProvider().providePlanets()
-        when(response){
-            is State.Success -> response.result?.let { updateUi(it) }
+        val response = StarWarsDataProvider.providePlanets()
+        when (response) {
+            is State.PlanetList -> response.result?.let { updateUi(it) }
             is State.Error -> view.showErrorMessage()
         }
     }

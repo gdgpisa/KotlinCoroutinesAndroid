@@ -3,4 +3,5 @@
     <string name="error_loading_data_message">Error loading data</string>
     <string name="loading_data_message">loading data, wait please</string>
     <string name="image_item">image item</string>
+    <string name="error_details">something Wrong happened</string>
 </resources>
