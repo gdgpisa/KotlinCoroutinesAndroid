@@ -1,4 +1,4 @@
-package de.giannig.myapplication
+package com.giannig.starwarskotlin
 
 import org.junit.Test
 

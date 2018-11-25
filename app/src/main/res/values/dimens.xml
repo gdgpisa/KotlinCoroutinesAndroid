@@ -4,5 +4,7 @@
     <dimen name="error_message_text_size">21sp</dimen>
     <dimen name="image_size">72dp</dimen>
     <dimen name="elevation_list_item">5dp</dimen>
-    <dimen name="text_item_size">48sp</dimen>
+    <dimen name="text_item_size">21sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_padding">8dp</dimen>
 </resources>

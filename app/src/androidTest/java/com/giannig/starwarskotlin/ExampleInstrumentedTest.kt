@@ -1,7 +1,7 @@
-package de.giannig.myapplication
+package com.giannig.starwarskotlin
 
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import android.support.test.InstrumentationRegistry
+import android.support.test.runner.AndroidJUnit4
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("de.giannig.myapplication", appContext.packageName)
+        assertEquals("com.giannig.starwarskotlin", appContext.packageName)
     }
 }

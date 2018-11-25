@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Star wars</string>
     <string name="error_loading_data_message">Error loading data</string>
     <string name="loading_data_message">loading data, wait please</string>
     <string name="image_item">image item</string>

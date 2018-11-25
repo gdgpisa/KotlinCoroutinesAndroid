@@ -1,19 +1,18 @@
-package de.giannig.myapplication
+package com.giannig.starwarskotlin.view.adapters
 
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import com.giannig.starwarskotlin.R
+import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
 
-//todo 3: replace String with dto
-//todo 4: add model
 class MainListAdapter(private val onItemClick: (View) -> Unit) : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>(){
 
-   private var list:List<String> = emptyList()
+   private var list:List<StarWarsPlanet> = emptyList()
 
-    fun addValues(newList: List<String>) {
+    fun addValues(newList: List<StarWarsPlanet>) {
         list = list.plus(newList)
         notifyDataSetChanged()
     }
@@ -33,11 +32,10 @@ class MainListAdapter(private val onItemClick: (View) -> Unit) : RecyclerView.Ad
     }
 
     class MainListViewHolder (private val v : View): RecyclerView.ViewHolder(v) {
-        private val imageView = v.findViewById<ImageView>(R.id.imageItem)
-        private val textView = v.findViewById<TextView>(R.id.textItem)
+        private val planetNameText = v.findViewById<TextView>(R.id.textPlanetName)
 
-        fun set(item: String, onClick: (View) -> Unit) {
-            textView.text = item
+        fun set(item: StarWarsPlanet, onClick: (View) -> Unit) {
+            planetNameText.text = item.name
             v.setOnClickListener{onClick(it)}
         }
     }

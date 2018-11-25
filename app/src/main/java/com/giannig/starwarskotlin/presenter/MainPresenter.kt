@@ -1,5 +1,8 @@
-package de.giannig.myapplication
+package com.giannig.starwarskotlin.presenter
 
+import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.model.StarWarsDataProvider
+import com.giannig.starwarskotlin.view.MainView
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -8,6 +11,7 @@ import kotlin.coroutines.CoroutineContext
 class MainPresenter(private val view: MainView) : CoroutineScope {
 
     private val job = Job()
+
     override val coroutineContext: CoroutineContext
         get() = job + IO
 
@@ -24,21 +28,12 @@ class MainPresenter(private val view: MainView) : CoroutineScope {
         job.cancel()
     }
 
-    private fun loadData() = launch {
-        val result = async {
-            //todo 0: add tests
-            //todo 1: remove mocked list+delay and replace with retrofit2 + coroutine support
-            //todo 2: add sealed class state
-            delay(1000)
-            listOf("Kotlin", "Java")
-        }.await()
-
-        if (result.isNotEmpty()) {
-            updateUi(result)
-        }
+    private fun loadData() = launch(Main) {
+        val result = StarWarsDataProvider().providePlanets().await()
+        result.results?.let { updateUi(it) } ?: updateUi(emptyList())
     }
 
-    private suspend fun updateUi(result: List<String>) = withContext(Main) {
+    private suspend fun updateUi(result: List<StarWarsPlanet>) = withContext(Main) {
         view.updateList(result)
         view.showItemList()
     }

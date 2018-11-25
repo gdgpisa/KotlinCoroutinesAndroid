@@ -1,9 +1,13 @@
-package de.giannig.myapplication
+package com.giannig.starwarskotlin.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.giannig.starwarskotlin.R
+import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.presenter.MainPresenter
+import com.giannig.starwarskotlin.view.adapters.MainListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -23,7 +27,7 @@ class MainActivity : AppCompatActivity(), MainView {
         presenter.onCreate()
     }
 
-    override fun updateList(list: List<String>) {
+    override fun updateList(list: List<StarWarsPlanet>) {
         adapter.addValues(list)
     }
 
