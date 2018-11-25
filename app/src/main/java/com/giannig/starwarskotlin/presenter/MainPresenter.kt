@@ -24,6 +24,11 @@ class MainPresenter(private val view: MainView) : CoroutineScope {
         view.loading()
     }
 
+    fun update() {
+        loadData()
+        view.loading()
+    }
+
     fun onClose() {
         job.cancel()
     }

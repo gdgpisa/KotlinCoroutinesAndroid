@@ -10,6 +10,7 @@ import com.giannig.starwarskotlin.presenter.MainPresenter
 import com.giannig.starwarskotlin.view.adapters.MainListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity(), MainView {
 
     private val presenter = MainPresenter(this)
@@ -25,6 +26,18 @@ class MainActivity : AppCompatActivity(), MainView {
         itemList.layoutManager = LinearLayoutManager(this)
         itemList.adapter = adapter
         presenter.onCreate()
+
+        swipeToRefreshContainer.setOnRefreshListener {
+            presenter.update()
+        }
+
+        swipeToRefreshContainer.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        )
+
     }
 
     override fun updateList(list: List<StarWarsPlanet>) {
@@ -37,19 +50,19 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun loading() {
-        loadingBar.visibility = View.VISIBLE
+        swipeToRefreshContainer.isRefreshing = true
         itemList.visibility = View.GONE
         errorText.visibility = View.GONE
     }
 
     override fun showItemList() {
-        loadingBar.visibility = View.GONE
+        swipeToRefreshContainer.isRefreshing = false
         itemList.visibility = View.VISIBLE
         errorText.visibility = View.GONE
     }
 
     override fun showErrorMessage() {
-        loadingBar.visibility = View.GONE
+        swipeToRefreshContainer.isRefreshing = false
         itemList.visibility = View.GONE
         errorText.visibility = View.VISIBLE
     }
