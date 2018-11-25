@@ -1,8 +1,8 @@
-package com.giannig.starwarskotlin.model.api
+package com.giannig.starwarskotlin.data.api
 
-import com.giannig.starwarskotlin.model.dto.StarWarsPeople
-import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
-import com.giannig.starwarskotlin.model.dto.StarWarsPlanets
+import com.giannig.starwarskotlin.data.dto.StarWarsPeople
+import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsPlanets
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path

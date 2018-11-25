@@ -1,4 +1,4 @@
-package com.giannig.starwarskotlin.model.dto
+package com.giannig.starwarskotlin.data.dto
 
 data class StarWarsPlanet(
     val climate: String?,

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.giannig.starwarskotlin.R
-import com.giannig.starwarskotlin.model.State
+import com.giannig.starwarskotlin.data.State
 import com.giannig.starwarskotlin.details.DetailsPresenter
 import kotlinx.android.synthetic.main.activity_details.*
 

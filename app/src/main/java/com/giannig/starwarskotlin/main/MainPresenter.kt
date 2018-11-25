@@ -1,8 +1,8 @@
 package com.giannig.starwarskotlin.main
 
-import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
-import com.giannig.starwarskotlin.model.StarWarsDataProvider
-import com.giannig.starwarskotlin.model.State
+import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.StarWarsDataProvider
+import com.giannig.starwarskotlin.data.State
 import com.giannig.starwarskotlin.main.view.MainView
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO

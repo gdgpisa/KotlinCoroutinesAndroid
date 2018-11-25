@@ -1,7 +1,7 @@
-package com.giannig.starwarskotlin.model.api
+package com.giannig.starwarskotlin.data.api
 
-import com.giannig.starwarskotlin.model.dto.StarWarsPeople
-import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsPeople
+import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

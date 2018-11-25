@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.giannig.starwarskotlin.R
-import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
 
 class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>() {
 

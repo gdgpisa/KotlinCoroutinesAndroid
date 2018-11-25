@@ -1,6 +1,6 @@
 package com.giannig.starwarskotlin.main.view
 
-import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
 
 interface MainView {
     fun loading ()

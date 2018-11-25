@@ -1,7 +1,7 @@
 package com.giannig.starwarskotlin.details
 
-import com.giannig.starwarskotlin.model.StarWarsDataProvider
-import com.giannig.starwarskotlin.model.State
+import com.giannig.starwarskotlin.data.StarWarsDataProvider
+import com.giannig.starwarskotlin.data.State
 import com.giannig.starwarskotlin.details.view.DetailsActivity
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
