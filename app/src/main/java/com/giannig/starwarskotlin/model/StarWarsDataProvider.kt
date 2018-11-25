@@ -2,11 +2,13 @@ package com.giannig.starwarskotlin.model
 
 import com.giannig.starwarskotlin.api.Api
 import com.giannig.starwarskotlin.api.StarWarsApiKC
+import com.giannig.starwarskotlin.model.dto.StarWarsPlanet
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 class StarWarsDataProvider {
 
@@ -20,10 +22,17 @@ class StarWarsDataProvider {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build().create(StarWarsApiKC::class.java)
 
-    fun providePlanets() = retrofit.getPlanets()
+    suspend fun providePlanets(): State {
+        return try {
+            val planets = retrofit.getPlanets().await()
+            State.Success(planets.results)
+        }catch (e: IOException){
+            State.Error
+        }
+    }
+}
 
-
-    fun providePlanet(id: String) = retrofit.getPlanet(id)
-
-    fun providePeople(id: String) = retrofit.getPeople(id)
+sealed class State {
+    data class Success(val result: List<StarWarsPlanet>?): State()
+    object Error : State()
 }

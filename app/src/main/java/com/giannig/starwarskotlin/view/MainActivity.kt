@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
         itemList.layoutManager = LinearLayoutManager(this)
         itemList.adapter = adapter
-        presenter.onCreate()
 
+        presenter.update()
         swipeToRefreshContainer.setOnRefreshListener {
             presenter.update()
         }
@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun loading() {
         swipeToRefreshContainer.isRefreshing = true
-        itemList.visibility = View.GONE
         errorText.visibility = View.GONE
     }
 
