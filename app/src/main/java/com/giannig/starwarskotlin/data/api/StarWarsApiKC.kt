@@ -1,7 +1,7 @@
 package com.giannig.starwarskotlin.data.api
 
 import com.giannig.starwarskotlin.data.dto.StarWarsPeople
-import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.data.dto.StarWarsPlanets
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -12,7 +12,7 @@ interface StarWarsApiKC {
     fun getPlanets(): Deferred<StarWarsPlanets>
 
     @GET("planets/{id}")
-    fun getPlanet(@Path("id") id:String): Deferred<StarWarsPlanet>
+    fun getPlanet(@Path("id") id:String): Deferred<StarWarsSinglePlanet>
 
     @GET("people/{id}")
     fun getPeople(@Path("id") id:String): Deferred<List<StarWarsPeople>>

@@ -2,7 +2,7 @@ package com.giannig.starwarskotlin.data
 
 import com.giannig.starwarskotlin.data.api.Api
 import com.giannig.starwarskotlin.data.api.StarWarsApiKC
-import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,7 +42,7 @@ object StarWarsDataProvider {
 }
 
 sealed class State {
-    data class Planet(val planet: StarWarsPlanet):State()
-    data class PlanetList(val result: List<StarWarsPlanet>?): State()
+    data class Planet(val planet: StarWarsSinglePlanet):State()
+    data class PlanetList(val result: List<StarWarsSinglePlanet>?): State()
     object Error : State()
 }

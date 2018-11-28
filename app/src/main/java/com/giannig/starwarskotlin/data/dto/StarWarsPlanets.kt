@@ -1,5 +1,5 @@
 package com.giannig.starwarskotlin.data.dto
 
 data class StarWarsPlanets(
-    val results: List<StarWarsPlanet>?
+    val results: List<StarWarsSinglePlanet>?
 )

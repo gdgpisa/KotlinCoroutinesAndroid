@@ -1,6 +1,6 @@
 package com.giannig.starwarskotlin.data.dto
 
-data class StarWarsPlanet(
+data class StarWarsSinglePlanet(
     val climate: String?,
     val created: String?,
     val diameter: String?,

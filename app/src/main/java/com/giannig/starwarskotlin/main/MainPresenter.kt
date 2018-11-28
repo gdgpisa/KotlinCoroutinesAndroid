@@ -1,6 +1,6 @@
 package com.giannig.starwarskotlin.main
 
-import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.data.StarWarsDataProvider
 import com.giannig.starwarskotlin.data.State
 import com.giannig.starwarskotlin.main.view.MainView
@@ -33,7 +33,7 @@ class MainPresenter(private val view: MainView) : CoroutineScope {
         }
     }
 
-    private suspend fun updateUi(result: List<StarWarsPlanet>) = withContext(Main) {
+    private suspend fun updateUi(result: List<StarWarsSinglePlanet>) = withContext(Main) {
         view.updateList(result)
         view.showItemList()
     }

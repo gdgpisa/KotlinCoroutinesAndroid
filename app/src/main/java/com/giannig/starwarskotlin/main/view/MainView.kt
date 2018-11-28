@@ -1,10 +1,10 @@
 package com.giannig.starwarskotlin.main.view
 
-import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 
 interface MainView {
     fun loading ()
-    fun updateList(list: List<StarWarsPlanet>)
+    fun updateList(list: List<StarWarsSinglePlanet>)
     fun showItemList()
     fun showErrorMessage()
 }

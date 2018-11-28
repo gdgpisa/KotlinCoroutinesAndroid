@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.giannig.starwarskotlin.R
-import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.main.MainPresenter
 import com.giannig.starwarskotlin.details.view.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), MainView {
         )
     }
 
-    override fun updateList(list: List<StarWarsPlanet>) {
+    override fun updateList(list: List<StarWarsSinglePlanet>) {
         adapter.addValues(list)
     }
 

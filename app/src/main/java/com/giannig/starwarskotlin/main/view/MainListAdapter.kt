@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.giannig.starwarskotlin.R
-import com.giannig.starwarskotlin.data.dto.StarWarsPlanet
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 
 class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>() {
 
-    private var list: List<StarWarsPlanet> = emptyList()
+    private var list: List<StarWarsSinglePlanet> = emptyList()
     private var onItemClick: (Int) -> Unit = {}
 
-    fun addValues(newList: List<StarWarsPlanet>) {
+    fun addValues(newList: List<StarWarsSinglePlanet>) {
         list = list.plus(newList)
         notifyDataSetChanged()
     }
@@ -41,7 +41,7 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
     class MainListViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
         private val planetNameText = v.findViewById<TextView>(R.id.textPlanetName)
 
-        fun set(item: StarWarsPlanet, onClick: (View) -> Unit) {
+        fun set(item: StarWarsSinglePlanet, onClick: (View) -> Unit) {
             planetNameText.text = item.name
             v.setOnClickListener{onClick(it)}
         }
