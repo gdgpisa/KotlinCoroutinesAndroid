@@ -18,7 +18,7 @@ class DetailsPresenter(private val view: DetailsActivity) : CoroutineScope {
     }
 
     fun loadData(planetId: String) = launch {
-        val response = StarWarsDataProvider.providePlanet(planetId)
+        val response = StarWarsDataProvider.provideSinglePlanet(planetId)
         when (response) {
             is State.Planet -> updateUi(response)
             is State.Error -> view.showErrorMessage()

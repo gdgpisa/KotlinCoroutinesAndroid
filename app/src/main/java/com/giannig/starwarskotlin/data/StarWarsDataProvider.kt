@@ -31,7 +31,7 @@ object StarWarsDataProvider {
         }
     }
 
-    suspend fun providePlanet(planetId: String): State {
+    suspend fun provideSinglePlanet(planetId: String): State {
         return try {
             val planet = retrofit.getPlanet(planetId).await()
             State.Planet(planet)
