@@ -1,22 +1,32 @@
 package com.giannig.starwarskotlin.main
 
+import android.annotation.SuppressLint
+import android.os.AsyncTask
 import com.giannig.starwarskotlin.data.StarWarsDataProvider
 import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.main.view.MainView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
-class MainPresenter(private val view: MainView) : CoroutineScope {
+class MainPresenter(private val view: MainView) {
 
-    private val job = Job()
+    @SuppressLint("StaticFieldLeak")
+    private val task = object : AsyncTask<Void, Void, List<StarWarsSinglePlanet>>() {
+        override fun doInBackground(vararg params: Void?): List<StarWarsSinglePlanet>? {
+            val planets = StarWarsDataProvider.providePlanets().execute()
 
-    override val coroutineContext: CoroutineContext
-        get() = job + IO
+            return if (planets.isSuccessful) {
+                planets.body()?.planets
+            } else {
+                emptyList()
+            }
+        }
+
+        override fun onPostExecute(result: List<StarWarsSinglePlanet>?) {
+            super.onPostExecute(result)
+            result?.let {
+                updateUi(it)
+            }
+        }
+    }
 
     fun update() {
         loadData()
@@ -24,16 +34,14 @@ class MainPresenter(private val view: MainView) : CoroutineScope {
     }
 
     fun onClose() {
-        job.cancel()
+        task.cancel(true)
     }
 
-    private fun loadData() = launch {
-        val response = StarWarsDataProvider.providePlanets()
-        val planets = response.planets ?: emptyList()
-        updateUi(planets)
+    private fun loadData() {
+        task.execute()
     }
 
-    private suspend fun updateUi(result: List<StarWarsSinglePlanet>) = withContext(Main) {
+    fun updateUi(result: List<StarWarsSinglePlanet>) { //with context Main
         if (result.isEmpty()) {
             view.showErrorMessage()
         } else {
