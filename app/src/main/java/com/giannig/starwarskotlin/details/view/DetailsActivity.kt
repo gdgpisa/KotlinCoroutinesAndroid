@@ -2,11 +2,11 @@ package com.giannig.starwarskotlin.details.view
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.giannig.starwarskotlin.R
-import com.giannig.starwarskotlin.data.State
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.details.DetailsPresenter
 import kotlinx.android.synthetic.main.activity_details.*
 
@@ -40,11 +40,11 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
         textDetailsPlanet.text = getString(R.string.error_details)
     }
 
-    override fun showData(result: State.Planet) {
+    override fun showData(planet: StarWarsSinglePlanet) {
         detailsLoading.visibility = View.GONE
         textDetailsPeople.visibility = View.VISIBLE
         textDetailsPlanet.visibility = View.VISIBLE
-        textDetailsPlanet.text = result.planet.name
-        textDetailsPeople.text = result.planet.population
+        textDetailsPlanet.text = planet.name
+        textDetailsPeople.text = planet.population
     }
 }

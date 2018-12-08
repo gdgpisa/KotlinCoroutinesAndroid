@@ -2,13 +2,13 @@ package com.giannig.starwarskotlin.data
 
 import com.giannig.starwarskotlin.data.api.Api
 import com.giannig.starwarskotlin.data.api.StarWarsApiKC
+import com.giannig.starwarskotlin.data.dto.StarWarsPlanetList
 import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 
 object StarWarsDataProvider {
 
@@ -22,27 +22,21 @@ object StarWarsDataProvider {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build().create(StarWarsApiKC::class.java)
 
-    suspend fun providePlanets(): State {
-        return try {
-            val planets = retrofit.getPlanets().await()
-            State.PlanetList(planets.results)
-        }catch (e: IOException){
-            State.Error
-        }
+    suspend fun providePlanets(): StarWarsPlanetList {
+        return retrofit.getPlanetList().await()
     }
 
-    suspend fun provideSinglePlanet(planetId: String): State {
-        return try {
-            val planet = retrofit.getPlanet(planetId).await()
-            State.Planet(planet)
-        }catch (e: IOException){
-            State.Error
-        }
+    suspend fun provideSinglePlanet(planetId: String): StarWarsSinglePlanet {
+        return retrofit.getPlanet(planetId).await()
     }
-}
 
-sealed class State {
-    data class Planet(val planet: StarWarsSinglePlanet):State()
-    data class PlanetList(val result: List<StarWarsSinglePlanet>?): State()
-    object Error : State()
+    suspend fun getPlanets(counter: Int): List<StarWarsSinglePlanet> {
+        val planetList = mutableListOf<StarWarsSinglePlanet>()
+
+        for (id in 1..counter) {
+            planetList += provideSinglePlanet(id.toString())
+        }
+
+        return planetList
+    }
 }

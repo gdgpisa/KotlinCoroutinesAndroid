@@ -1,12 +1,14 @@
 package com.giannig.starwarskotlin.main
 
-import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.data.StarWarsDataProvider
-import com.giannig.starwarskotlin.data.State
+import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.main.view.MainView
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class MainPresenter(private val view: MainView) : CoroutineScope {
@@ -27,14 +29,16 @@ class MainPresenter(private val view: MainView) : CoroutineScope {
 
     private fun loadData() = launch {
         val response = StarWarsDataProvider.providePlanets()
-        when (response) {
-            is State.PlanetList -> response.result?.let { updateUi(it) }
-            is State.Error -> view.showErrorMessage()
-        }
+        val planets = response.planets ?: emptyList()
+        updateUi(planets)
     }
 
     private suspend fun updateUi(result: List<StarWarsSinglePlanet>) = withContext(Main) {
-        view.updateList(result)
-        view.showItemList()
+        if (result.isEmpty()) {
+            view.showErrorMessage()
+        } else {
+            view.updateList(result)
+            view.showItemList()
+        }
     }
 }
