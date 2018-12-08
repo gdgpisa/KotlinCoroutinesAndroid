@@ -2,8 +2,6 @@ package com.giannig.starwarskotlin.data
 
 import com.giannig.starwarskotlin.data.api.Api
 import com.giannig.starwarskotlin.data.api.StarWarsApi
-import com.giannig.starwarskotlin.data.dto.StarWarsPlanetList
-import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,21 +20,5 @@ object StarWarsDataProvider {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build().create(StarWarsApi::class.java)
 
-    suspend fun providePlanets(): StarWarsPlanetList {
-        return retrofit.getPlanetList().await()
-    }
 
-    suspend fun provideSinglePlanet(planetId: String): StarWarsSinglePlanet {
-        return retrofit.getPlanet(planetId).await()
-    }
-
-    suspend fun getPlanets(counter: Int): List<StarWarsSinglePlanet> {
-        val planetList = mutableListOf<StarWarsSinglePlanet>()
-
-        for (id in 1..counter) {
-            planetList += provideSinglePlanet(id.toString())
-        }
-
-        return planetList
-    }
 }
