@@ -1,7 +1,7 @@
 package com.giannig.starwarskotlin.data
 
 import com.giannig.starwarskotlin.data.api.Api
-import com.giannig.starwarskotlin.data.api.StarWarsApiKC
+import com.giannig.starwarskotlin.data.api.StarWarsApi
 import com.giannig.starwarskotlin.data.dto.StarWarsPlanetList
 import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -20,7 +20,7 @@ object StarWarsDataProvider {
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build().create(StarWarsApiKC::class.java)
+        .build().create(StarWarsApi::class.java)
 
     suspend fun providePlanets(): StarWarsPlanetList {
         return retrofit.getPlanetList().await()
