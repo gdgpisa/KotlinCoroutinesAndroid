@@ -8,31 +8,37 @@ import com.giannig.starwarskotlin.details.view.DetailsActivity
 
 class DetailsPresenter(private val view: DetailsActivity) {
 
-    @SuppressLint("StaticFieldLeak")
-    val asyncTask = object : AsyncTask<String, Void, StarWarsSinglePlanet?>() {
-        override fun doInBackground(vararg params: String?): StarWarsSinglePlanet? {
-            val planet = StarWarsDataProvider.provideSinglePlanet(params[0] as String).execute()
-            return if (planet.isSuccessful) {
-                planet.body()
-            } else {
-                null
-            }
-        }
 
-        override fun onPostExecute(result: StarWarsSinglePlanet?) {
-            super.onPostExecute(result)
-            result?.let {
-                updateUi(it)
-            }
-        }
-    }
+    private var asyncTask: AsyncTask<
+        String,
+        Void,
+        StarWarsSinglePlanet?
+    >? = null
 
     fun onClose() {
-        asyncTask.cancel(true)
+        this.asyncTask?.cancel(true)
     }
 
     fun loadData(planetId: String) {
-        asyncTask.execute(planetId)
+        @SuppressLint("StaticFieldLeak")
+        this.asyncTask = object : AsyncTask<String, Void, StarWarsSinglePlanet?>() {
+
+            override fun doInBackground(vararg params: String?): StarWarsSinglePlanet? {
+                val planet = StarWarsDataProvider.provideSinglePlanet(params[0] as String).execute()
+                return if (planet.isSuccessful) {
+                    planet.body()
+                } else {
+                    null
+                }
+            }
+
+            override fun onPostExecute(result: StarWarsSinglePlanet?) {
+                super.onPostExecute(result)
+                result?.let {
+                    updateUi(it)
+                }
+            }
+        }.execute(planetId)
     }
 
     private fun updateUi(result: StarWarsSinglePlanet) { // withContext(Dispatchers.Main)

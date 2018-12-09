@@ -8,25 +8,11 @@ import com.giannig.starwarskotlin.main.view.MainView
 
 class MainPresenter(private val view: MainView) {
 
-    @SuppressLint("StaticFieldLeak")
-    private val task = object : AsyncTask<Void, Void, List<StarWarsSinglePlanet>>() {
-        override fun doInBackground(vararg params: Void?): List<StarWarsSinglePlanet>? {
-            val planets = StarWarsDataProvider.providePlanets().execute()
-
-            return if (planets.isSuccessful) {
-                planets.body()?.planets
-            } else {
-                emptyList()
-            }
-        }
-
-        override fun onPostExecute(result: List<StarWarsSinglePlanet>?) {
-            super.onPostExecute(result)
-            result?.let {
-                updateUi(it)
-            }
-        }
-    }
+    private var task: AsyncTask<
+            Void,
+            Void,
+            List<StarWarsSinglePlanet>
+    >? = null
 
     fun update() {
         loadData()
@@ -34,11 +20,29 @@ class MainPresenter(private val view: MainView) {
     }
 
     fun onClose() {
-        task.cancel(true)
+        task?.cancel(true)
     }
 
+    @SuppressLint("StaticFieldLeak")
     private fun loadData() {
-        task.execute()
+        task = object : AsyncTask<Void, Void, List<StarWarsSinglePlanet>>() {
+            override fun doInBackground(vararg params: Void?): List<StarWarsSinglePlanet>? {
+                val planets = StarWarsDataProvider.providePlanets().execute()
+
+                return if (planets.isSuccessful) {
+                    planets.body()?.planets
+                } else {
+                    emptyList()
+                }
+            }
+
+            override fun onPostExecute(result: List<StarWarsSinglePlanet>?) {
+                super.onPostExecute(result)
+                result?.let {
+                    updateUi(it)
+                }
+            }
+        }.execute()
     }
 
     fun updateUi(result: List<StarWarsSinglePlanet>) { //with context Main
