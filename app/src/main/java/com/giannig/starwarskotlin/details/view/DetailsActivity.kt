@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
+import android.view.View.*
 import com.giannig.starwarskotlin.R
 import com.giannig.starwarskotlin.data.dto.StarWarsSinglePlanet
 import com.giannig.starwarskotlin.details.DetailsPresenter
@@ -23,6 +23,9 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
         setContentView(R.layout.activity_details)
         val planetId = intent.getStringExtra(PLANET_ID_EXTRA)
         presenter.loadData(planetId)
+        planetImageView.setImageDrawable(getDrawable(R.drawable.empire))
+        planetImageView.visibility = GONE
+        hideTextViews()
     }
 
     override fun onDestroy() {
@@ -31,20 +34,52 @@ class DetailsActivity : AppCompatActivity(), DetailsView {
     }
 
     override fun loading() {
-        detailsLoading.visibility = View.VISIBLE
-        textDetailsPeople.visibility = View.GONE
-        textDetailsPlanet.visibility = View.GONE
+        detailsLoading.visibility = VISIBLE
+        planetImageView.visibility = GONE
+        hideTextViews()
+    }
+
+    private fun hideTextViews() {
+        textPlanetCitizens.visibility = GONE
+        textDetailsPlanetName.visibility = GONE
+        textPlanetDimensions.visibility = GONE
+        textPlanetSurface.visibility = GONE
     }
 
     override fun showErrorMessage() {
-        textDetailsPlanet.text = getString(R.string.error_details)
+        textDetailsPlanetName.text = getString(R.string.error_details)
     }
 
     override fun showData(planet: StarWarsSinglePlanet) {
-        detailsLoading.visibility = View.GONE
-        textDetailsPeople.visibility = View.VISIBLE
-        textDetailsPlanet.visibility = View.VISIBLE
-        textDetailsPlanet.text = planet.name
-        textDetailsPeople.text = planet.population
+        detailsLoading.visibility = GONE
+        planetImageView.visibility = VISIBLE
+
+        planet.run {
+            textDetailsPlanetName.text = name
+            textPlanetCitizens.text = getString(
+                R.string.population,
+                population
+            )
+
+            textPlanetDimensions.text = getString(
+                R.string.planet_dimensions,
+                diameter
+            )
+
+            textPlanetSurface.text = getString(
+                R.string.terrain_and_water,
+                terrain ?: "no terrain",
+                surfaceWater ?: "no water"
+            )
+        }
+
+        showTextViews()
+    }
+
+    private fun showTextViews() {
+        textPlanetCitizens.visibility = VISIBLE
+        textDetailsPlanetName.visibility = VISIBLE
+        textPlanetDimensions.visibility = VISIBLE
+        textPlanetSurface.visibility = VISIBLE
     }
 }
