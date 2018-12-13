@@ -4,4 +4,8 @@
     <string name="loading_data_message">loading data, wait please</string>
     <string name="image_item">image item</string>
     <string name="error_details">something Wrong happened</string>
+    <string name="terrain_and_water">"%1$s (water: %2$s)"</string>
+    <string name="population">"population: %1$s ab"</string>
+    <string name="planet_dimensions">"planet dimensions: %1$s Km"</string>
+    <string name="placeholder">placeholder</string>
 </resources>
